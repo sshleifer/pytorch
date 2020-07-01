@@ -27,57 +27,41 @@ from torch.testing._internal.distributed.rpc.rpc_test import ProcessGroupAgentRp
 @unittest.skipIf(
     TEST_WITH_ASAN, "Skip ASAN as torch + multiprocessing spawn have known issues"
 )
-class SpawnHelper(MultiProcessTestCase):
+class SpawnHelper(ProcessGroupRpcAgentTestFixture, MultiProcessTestCase):
     def setUp(self):
         super().setUp()
         self._spawn_processes()
 
 
-class ProcessGroupRpcTestWithSpawn(
-    ProcessGroupRpcAgentTestFixture, ProcessGroupAgentRpcTest, SpawnHelper
-):
+class ProcessGroupRpcTestWithSpawn(ProcessGroupAgentRpcTest, SpawnHelper):
     pass
 
 
-class ProcessGroupDistAutogradTestWithSpawn(
-    ProcessGroupRpcAgentTestFixture, DistAutogradTest, SpawnHelper
-):
+class ProcessGroupDistAutogradTestWithSpawn(DistAutogradTest, SpawnHelper):
     pass
 
 
-class ProcessGroupDistOptimizerTestWithSpawn(
-    ProcessGroupRpcAgentTestFixture, DistOptimizerTest, SpawnHelper
-):
+class ProcessGroupDistOptimizerTestWithSpawn(DistOptimizerTest, SpawnHelper):
     pass
 
 
-class ProcessGroupJitRpcTestWithSpawn(
-    ProcessGroupRpcAgentTestFixture, JitRpcTest, SpawnHelper
-):
+class ProcessGroupJitRpcTestWithSpawn(JitRpcTest, SpawnHelper):
     pass
 
 
-class ProcessGroupJitDistAutogradTestWithSpawn(
-    ProcessGroupRpcAgentTestFixture, JitDistAutogradTest, SpawnHelper
-):
+class ProcessGroupJitDistAutogradTestWithSpawn(JitDistAutogradTest, SpawnHelper):
     pass
 
 
-class ProcessGroupRemoteModuleTestWithSpawn(
-    ProcessGroupRpcAgentTestFixture, RemoteModuleTest, SpawnHelper
-):
+class ProcessGroupRemoteModuleTestWithSpawn(RemoteModuleTest, SpawnHelper):
     pass
 
 
-class ProcessGroupTestDdpUnderDistAutogradWrapper(
-    ProcessGroupRpcAgentTestFixture, TestDdpUnderDistAutograd, SpawnHelper
-):
+class ProcessGroupTestDdpUnderDistAutogradWrapper(TestDdpUnderDistAutograd, SpawnHelper):
     pass
 
 
-class ProcessGroupTestDdpComparison(
-    ProcessGroupRpcAgentTestFixture, TestDdpComparison, SpawnHelper
-):
+class ProcessGroupTestDdpComparison(TestDdpComparison, SpawnHelper):
     pass
 
 
